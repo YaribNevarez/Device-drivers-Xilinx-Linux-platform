@@ -1,2 +1,2 @@
-/home/yarib/ZYBO_projects/drivers/adc/adc.ko
-/home/yarib/ZYBO_projects/drivers/adc/adc.o
+/home/yarib/ZYBO_projects/Drivers/adc/adc.ko
+/home/yarib/ZYBO_projects/Drivers/adc/adc.o

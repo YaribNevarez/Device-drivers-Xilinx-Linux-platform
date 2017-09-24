@@ -210,8 +210,7 @@ static ssize_t proc_driver_write(struct file *file,
 {
     ssize_t written_size = 0;
 
-    if ((buffer != NULL) && (*buffer != 0) && (buffer_size == sizeof(DeviceID))
-        && (ADC_DEVICE_ID_BEGIN < *buffer) && (*buffer < ADC_DEVICE_ID_END))
+    if ((buffer != NULL) && (buffer_size == sizeof(DeviceID)))
     {
         written_size = buffer_size - copy_from_user((void *) &device_ID, buffer, sizeof(device_ID));
 
@@ -264,7 +263,7 @@ static ssize_t proc_driver_write(struct file *file,
             default:;
         }
     }
-    return buffer_size;
+    return written_size;
 }
 
 /* Read operation for /proc/driver
@@ -277,7 +276,7 @@ static ssize_t proc_driver_read(struct file *file,
 {
     ssize_t read_size = 0;
 
-    if ((buffer != NULL) && (*buffer != 0) && (sizeof(IOPacket) <= buffer_size))
+    if ((buffer != NULL) && (sizeof(IOPacket) <= buffer_size))
     {
         IOPacket packet;
         packet.device_ID = device_ID;

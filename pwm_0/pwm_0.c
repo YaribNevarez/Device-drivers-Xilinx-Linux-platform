@@ -83,7 +83,7 @@ typedef enum
     T0INT  = 0x100, // Timer 0 Interrupt
     PWMA0  = 0x200, // Enable Pulse Width Modulation for Timer 0
     ENALL0 = 0x400, // Enable All Timers
-    CASC   = 0x080  // Enable cascade mode of timers
+    CASC   = 0x800  // Enable cascade mode of timers
 } TCR0_Flags;
 
 // *** Control/Status Register 1 flags (TCSR1)
@@ -150,11 +150,9 @@ static ssize_t proc_driver_write(struct file *file,
 {
     ssize_t written_size = 0;
 
-    if ((buffer != NULL) && (*buffer != 0))
+    if (buffer != NULL)
     {
-        if (   (buffer_size == sizeof(device_ID))
-            && (PWM_DEVICE_ID_BEGIN < *buffer)
-            && (*buffer < PWM_DEVICE_ID_END))
+        if (buffer_size == sizeof(device_ID))
         {
             written_size = buffer_size - copy_from_user((void *) &device_ID, buffer, sizeof(device_ID));
         }
@@ -190,7 +188,7 @@ static ssize_t proc_driver_read(struct file *file,
 {
     ssize_t read_size = 0;
 
-    if ((buffer != NULL) && (*buffer != 0) && (sizeof(IOPacket) <= buffer_size))
+    if ((buffer != NULL) && (sizeof(IOPacket) <= buffer_size))
     {
         IOPacket packet;
         packet.device_ID = device_ID;

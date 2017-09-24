@@ -1,2 +1,2 @@
-/home/yarib/ZYBO_projects/drivers/controller/controller.ko
-/home/yarib/ZYBO_projects/drivers/controller/controller.o
+/home/yarib/ZYBO_projects/Drivers/controller/controller.ko
+/home/yarib/ZYBO_projects/Drivers/controller/controller.o

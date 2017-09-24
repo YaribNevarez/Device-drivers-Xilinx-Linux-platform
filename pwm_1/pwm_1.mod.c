@@ -31,7 +31,7 @@ __attribute__((section("__versions"))) = {
 	{ 0xe97af758, __VMLINUX_SYMBOL_STR(proc_create_data) },
 	{ 0xfb961d14, __VMLINUX_SYMBOL_STR(__arm_ioremap) },
 	{ 0xadf42bd5, __VMLINUX_SYMBOL_STR(__request_region) },
-	{ 0x4e3a4464, __VMLINUX_SYMBOL_STR(dev_err) },
+	{ 0xea443e7d, __VMLINUX_SYMBOL_STR(dev_err) },
 	{ 0xd3b6c45d, __VMLINUX_SYMBOL_STR(platform_get_resource) },
 	{ 0x67c2fa54, __VMLINUX_SYMBOL_STR(__copy_to_user) },
 	{ 0xee57ea5d, __VMLINUX_SYMBOL_STR(kmalloc_caches) },

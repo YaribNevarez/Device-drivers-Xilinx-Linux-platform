@@ -1,1 +1,1 @@
-cmd_/home/yarib/ZYBO_projects/drivers/pwm_1/pwm_1.ko := arm-xilinx-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/yarib/ZYBO_projects/drivers/pwm_1/pwm_1.ko /home/yarib/ZYBO_projects/drivers/pwm_1/pwm_1.o /home/yarib/ZYBO_projects/drivers/pwm_1/pwm_1.mod.o
+cmd_/home/yarib/ZYBO_projects/Drivers/pwm_1/pwm_1.ko := arm-xilinx-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/yarib/ZYBO_projects/Drivers/pwm_1/pwm_1.ko /home/yarib/ZYBO_projects/Drivers/pwm_1/pwm_1.o /home/yarib/ZYBO_projects/Drivers/pwm_1/pwm_1.mod.o

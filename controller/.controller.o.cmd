@@ -1,8 +1,8 @@
-cmd_/home/yarib/ZYBO_projects/drivers/controller/controller.o := arm-xilinx-linux-gnueabi-gcc -Wp,-MD,/home/yarib/ZYBO_projects/drivers/controller/.controller.o.d  -nostdinc -isystem /opt/Xilinx/SDK/2015.4/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-linux-gnueabi/4.9.2/include -I./arch/arm/include -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -Os -Wno-maybe-uninitialized --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(controller)"  -D"KBUILD_MODNAME=KBUILD_STR(controller)" -c -o /home/yarib/ZYBO_projects/drivers/controller/.tmp_controller.o /home/yarib/ZYBO_projects/drivers/controller/controller.c
+cmd_/home/yarib/ZYBO_projects/Drivers/controller/controller.o := arm-xilinx-linux-gnueabi-gcc -Wp,-MD,/home/yarib/ZYBO_projects/Drivers/controller/.controller.o.d  -nostdinc -isystem /opt/Xilinx/SDK/2015.4/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-linux-gnueabi/4.9.2/include -I./arch/arm/include -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -Os -Wno-maybe-uninitialized --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(controller)"  -D"KBUILD_MODNAME=KBUILD_STR(controller)" -c -o /home/yarib/ZYBO_projects/Drivers/controller/.tmp_controller.o /home/yarib/ZYBO_projects/Drivers/controller/controller.c
 
-source_/home/yarib/ZYBO_projects/drivers/controller/controller.o := /home/yarib/ZYBO_projects/drivers/controller/controller.c
+source_/home/yarib/ZYBO_projects/Drivers/controller/controller.o := /home/yarib/ZYBO_projects/Drivers/controller/controller.c
 
-deps_/home/yarib/ZYBO_projects/drivers/controller/controller.o := \
+deps_/home/yarib/ZYBO_projects/Drivers/controller/controller.o := \
   include/linux/kernel.h \
     $(wildcard include/config/lbdaf.h) \
     $(wildcard include/config/preempt/voluntary.h) \
@@ -542,6 +542,6 @@ deps_/home/yarib/ZYBO_projects/drivers/controller/controller.o := \
   /home/yarib/ZYBO_projects/app-workspace/framework/framework/deviceid.hpp \
   /home/yarib/ZYBO_projects/app-workspace/framework/framework/iodef.hpp \
 
-/home/yarib/ZYBO_projects/drivers/controller/controller.o: $(deps_/home/yarib/ZYBO_projects/drivers/controller/controller.o)
+/home/yarib/ZYBO_projects/Drivers/controller/controller.o: $(deps_/home/yarib/ZYBO_projects/Drivers/controller/controller.o)
 
-$(deps_/home/yarib/ZYBO_projects/drivers/controller/controller.o):
+$(deps_/home/yarib/ZYBO_projects/Drivers/controller/controller.o):

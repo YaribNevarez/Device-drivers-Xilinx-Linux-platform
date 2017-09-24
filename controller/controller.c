@@ -91,11 +91,9 @@ static ssize_t proc_driver_write(struct file *file,
 {
     ssize_t written_size = 0;
 
-    if ((buffer != NULL) && (*buffer != 0))
+    if (buffer != NULL)
     {
-        if (   (buffer_size == sizeof(device_ID))
-            && (CONTROLLER_DEVICE_ID_BEGIN < *buffer)
-            && (*buffer < CONTROLLER_DEVICE_ID_END))
+        if (buffer_size == sizeof(device_ID))
         {
             written_size = buffer_size - copy_from_user((void *) &device_ID, buffer, sizeof(device_ID));
         }
@@ -103,6 +101,7 @@ static ssize_t proc_driver_write(struct file *file,
         {
             IOPacket packet;
             written_size = buffer_size - copy_from_user((void *) &packet, buffer, sizeof(IOPacket));
+
             if (written_size == buffer_size )
             {
                 device_ID = packet.device_ID;
@@ -142,6 +141,7 @@ static ssize_t proc_driver_write(struct file *file,
                     case RELAY_1:
                         SET_SLICE_32(output_data, packet.data, 23, 0x1);
                         break;
+                    default:;
                 }
                 outport(output_data);
                 * position += written_size;
@@ -161,58 +161,56 @@ static ssize_t proc_driver_read(struct file *file,
 {
     ssize_t read_size = 0;
 
-    if ((buffer != NULL) && (*buffer != 0) && (sizeof(IOPacket) <= buffer_size))
+    if ((buffer != NULL) && (sizeof(IOPacket) <= buffer_size))
     {
-        if ((CONTROLLER_DEVICE_ID_BEGIN < device_ID) && (device_ID < CONTROLLER_DEVICE_ID_END))
-        {
-            IOPacket packet;
-            u32 input_data = inport();
-            packet.device_ID = device_ID;
+        IOPacket packet;
+        u32 input_data = inport();
+        packet.device_ID = device_ID;
 
-            switch (device_ID)
-            {
-                case FLUSHVALVE:
-                    packet.data = GET_SLICE_32(input_data, 0, 1);
-                    break;
-                case DRAINVALVE:
-                    packet.data = GET_SLICE_32(input_data, 1, 1);
-                    break;
-                case SHUTOFFVALVE:
-                    packet.data = GET_SLICE_32(input_data, 2, 1);
-                    break;
-                case VACUMGEN:
-                    packet.data = GET_SLICE_32(input_data, 3, 1);
-                    break;
-                case IRSENSOR:
-                    packet.data = GET_SLICE_32(input_data, 5, 1);
-                    break;
-                case DRAINLOCAL:
-                    packet.data = GET_SLICE_32(input_data, 6, 1);
-                    break;
-                case EMERGENCY:
-                    packet.data = GET_SLICE_32(input_data, 7, 3);
-                    break;
-                case APPSELECTION:
-                    packet.data = GET_SLICE_32(input_data, 9, 1);
-                    break;
-                case DRAINDELAY:
-                    packet.data = GET_SLICE_32(input_data, 10, 7);
-                    break;
-                case DRAININDICATOR:
-                    packet.data = GET_SLICE_32(input_data, 20, 1);
-                    break;
-                case LEAKINDICATOR:
-                    packet.data = GET_SLICE_32(input_data, 21, 1);
-                    break;
-                case RELAY_0:
-                    packet.data = GET_SLICE_32(input_data, 22, 1);
-                    break;
-                case RELAY_1:
-                    packet.data = GET_SLICE_32(input_data, 23, 1);
-                    break;
-            }
-            read_size = buffer_size - copy_to_user(buffer, (void *) &packet, sizeof(IOPacket));
+        switch (device_ID)
+        {
+            case FLUSHVALVE:
+                packet.data = GET_SLICE_32(input_data, 0, 1);
+                break;
+            case DRAINVALVE:
+                packet.data = GET_SLICE_32(input_data, 1, 1);
+                break;
+            case SHUTOFFVALVE:
+                packet.data = GET_SLICE_32(input_data, 2, 1);
+                break;
+            case VACUMGEN:
+                packet.data = GET_SLICE_32(input_data, 3, 1);
+                break;
+            case IRSENSOR:
+                packet.data = GET_SLICE_32(input_data, 5, 1);
+                break;
+            case DRAINLOCAL:
+                packet.data = GET_SLICE_32(input_data, 6, 1);
+                break;
+            case EMERGENCY:
+                packet.data = GET_SLICE_32(input_data, 7, 3);
+                break;
+            case APPSELECTION:
+                packet.data = GET_SLICE_32(input_data, 9, 1);
+                break;
+            case DRAINDELAY:
+                packet.data = GET_SLICE_32(input_data, 10, 7);
+                break;
+            case DRAININDICATOR:
+                packet.data = GET_SLICE_32(input_data, 20, 1);
+                break;
+            case LEAKINDICATOR:
+                packet.data = GET_SLICE_32(input_data, 21, 1);
+                break;
+            case RELAY_0:
+                packet.data = GET_SLICE_32(input_data, 22, 1);
+                break;
+            case RELAY_1:
+                packet.data = GET_SLICE_32(input_data, 23, 1);
+                break;
+            default:;
         }
+        read_size = buffer_size - copy_to_user(buffer, (void *) &packet, sizeof(IOPacket));
     }
     return read_size;
 }

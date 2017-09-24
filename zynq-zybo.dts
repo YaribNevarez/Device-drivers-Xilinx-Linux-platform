@@ -36,6 +36,7 @@
 	aliases {
 		ethernet0 = &ps7_ethernet_0;
 		serial0 = &ps7_uart_1;
+		serial1 = &ps7_uart_0;
 		spi0 = &ps7_qspi_0;	
 	} ;
 	chosen {
@@ -313,12 +314,15 @@
 			reg = <0xe0001000 0x1000>;
 			xlnx,has-modem = <0x0>;
 		} ;
-        uart0: serial@e0000000 {
+        ps7_uart_0: serial@e0000000 {
+        	clock-names = "uart_clk", "pclk";
+        	clocks = <&clkc 23>, <&clkc 40>;
             compatible = "xlnx,xuartps", "cdns,uart-r1p8";
-            clocks = <&clkc 23>, <&clkc 40>;
-            clock-names = "uart_clk", "pclk";
-            reg = <0xE0000000 0x1000>;
+			current-speed = <9600>;
+			device_type = "serial";
+            interrupt-parent = <&ps7_scugic_0>;
             interrupts = <0 27 4>;
+            reg = <0xE0000000 0x1000>;
         };
 		ps7_usb_0: ps7-usb@e0002000 {
 			clocks = <&clkc 28>;
