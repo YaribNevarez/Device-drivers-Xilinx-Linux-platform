@@ -39,6 +39,46 @@
 
 #define SUCCESS     0
 
+typedef enum
+{
+    CONVERSION  = 0x80,
+    SETUP       = 0x40,
+    AVERAGING   = 0x20,
+    RESET       = 0x10
+} MAX116XX_Registers;
+
+typedef enum
+{
+    SCAN_0TON   = 0x00,
+    SCAN_NTOH   = 0x02,
+    SCAN_N      = 0x04,
+    NO_SCAN     = 0x06
+} MAX116XX_Scannning;
+
+typedef enum
+{
+    NO_AVG      = 0x00,
+    AVG_4       = 0x10,
+    AVG_8       = 0x14,
+    AVG_16      = 0x18,
+    AVG_32      = 0x1C
+} MAX116XX_Avgerage;
+
+typedef enum
+{
+    CLK_INTERNAL    = 0x00,
+    CLK_INTERNAL_1  = 0x10,
+    CLK_INTERNAL_2  = 0x20,
+    CLK_EXTERNAL    = 0x30
+} MAX116XX_CLKselection;
+
+typedef enum
+{
+    REF_INTERNAL_DELAY  = 0x00,
+    REF_EXTERNAL        = 0x04,
+    REF_INTERNAL_ON     = 0x08,
+} MAX116XX_Reference;
+
 
 static unsigned long * base_addr = NULL;
 static struct resource * res = NULL;
@@ -134,11 +174,11 @@ static void spi_set_settle_time(u8 val)
     outport(SPI_CONTROL_REGISTER_INDEX, reg);
 }
 
-static u8 spi_get_transmission_done(void)
-{
-    u32 reg = inport(SPI_CONTROL_REGISTER_INDEX);
-    return REGISTER_GET(reg, SPI_TRANSMISSION_DONE_MASK, SPI_TRANSMISSION_DONE_SHIFT);
-}
+// static u8 spi_get_transmission_done(void)
+// {
+//     u32 reg = inport(SPI_CONTROL_REGISTER_INDEX);
+//     return REGISTER_GET(reg, SPI_TRANSMISSION_DONE_MASK, SPI_TRANSMISSION_DONE_SHIFT);
+// }
 
 static void spi_set_slave_select(u8 val)
 {
@@ -163,7 +203,7 @@ static u32 spi_receive_data(void)
     return inport(SPI_DATA_REGISTER_INDEX);
 }
 
-static void spi_send_data(u32 data)
+static u32 spi_send_data(u32 data)
 {
     u32 reg;
     do
@@ -172,11 +212,12 @@ static void spi_send_data(u32 data)
     }
     while(!(reg & SPI_TRANSMISSION_DONE_MASK));
     outport(SPI_DATA_REGISTER_INDEX, data);
+    return spi_receive_data();
 }
 ///////////////////////////////////////////////////////////////////////////////
 void spi_initialize(void)
 {
-    spi_set_baud_rate_divider(0x10); // AXI_CLK_FREC = 50000000
+    spi_set_baud_rate_divider(0x10); // SPI_CLK(f) = 50000000 / 0x10
     spi_set_clock_phase(0);
     spi_set_clock_polarity(0);
 
@@ -186,17 +227,17 @@ void spi_initialize(void)
 
     spi_set_data_length(SPI_DATA_LENGTH_8_BITS);
 
-    spi_send_data(0x10);
-    spi_send_data(0x20);
-    spi_send_data(0x78);
+    spi_send_data(RESET);
+    spi_send_data(AVERAGING | NO_AVG);
+    spi_send_data(SETUP | CLK_EXTERNAL | REF_INTERNAL_ON);
 
     spi_set_data_length(SPI_DATA_LENGTH_24_BITS);
 }
 
 u32 adc_read(u8 channel)
 {
-    spi_send_data((0x80 | channel << 3 | 0x6)<<16);
-    return spi_receive_data();
+    channel <<= 3;
+    return spi_send_data( ( CONVERSION | channel | NO_SCAN ) << 16 );
 }
 ///////////////////////////////////////////////////////////////////////////////
 
