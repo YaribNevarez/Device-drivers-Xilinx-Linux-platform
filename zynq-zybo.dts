@@ -341,6 +341,11 @@
 			interrupts = <0 7 4>;
 			reg = <0xf8007100 0x20>;
 		} ;
+		zybo
+		{
+			compatible = "yarib-zybo-1.00.a";
+			reg = <0x41210000 0x10000>;
+		} ;
 		adc
 		{
 			compatible = "yarib-adc-1.00.a";

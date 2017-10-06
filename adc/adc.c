@@ -31,8 +31,9 @@
 #include <linux/fcntl.h>
 
 #include "../../Hardware/ip_repo/ESPI_1.0/src/espi_hw.h"
-#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/iodef.hpp"
-#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/deviceid.hpp"
+#define KERNEL_MODULE
+#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp"
+#include "/home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp"
 
 /* Define Driver Name */
 #define DRIVER_NAME "adc"

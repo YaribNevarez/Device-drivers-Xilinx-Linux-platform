@@ -1,0 +1,1 @@
+cmd_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.ko := arm-xilinx-linux-gnueabi-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/yarib/ZYBO_projects/Drivers/zybo/zybo.ko /home/yarib/ZYBO_projects/Drivers/zybo/zybo.o /home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o

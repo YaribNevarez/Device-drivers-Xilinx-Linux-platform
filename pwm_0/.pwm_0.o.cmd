@@ -538,9 +538,8 @@ deps_/home/yarib/ZYBO_projects/Drivers/pwm_0/pwm_0.o := \
   include/linux/uuid.h \
   include/uapi/linux/uuid.h \
   include/linux/ctype.h \
-  /home/yarib/ZYBO_projects/app-workspace/framework/framework/iodef.hpp \
-  /home/yarib/ZYBO_projects/app-workspace/framework/framework/deviceid.hpp \
-  /home/yarib/ZYBO_projects/app-workspace/framework/framework/iodef.hpp \
+  /home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp \
+  /home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp \
 
 /home/yarib/ZYBO_projects/Drivers/pwm_0/pwm_0.o: $(deps_/home/yarib/ZYBO_projects/Drivers/pwm_0/pwm_0.o)
 

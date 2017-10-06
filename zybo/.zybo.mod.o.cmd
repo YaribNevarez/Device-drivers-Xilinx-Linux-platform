@@ -1,20 +1,41 @@
-cmd_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := arm-xilinx-linux-gnueabi-gcc -Wp,-MD,/home/yarib/ZYBO_projects/Drivers/adc/.adc.o.d  -nostdinc -isystem /opt/Xilinx/SDK/2015.4/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-linux-gnueabi/4.9.2/include -I./arch/arm/include -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -Os -Wno-maybe-uninitialized --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(adc)"  -D"KBUILD_MODNAME=KBUILD_STR(adc)" -c -o /home/yarib/ZYBO_projects/Drivers/adc/.tmp_adc.o /home/yarib/ZYBO_projects/Drivers/adc/adc.c
+cmd_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o := arm-xilinx-linux-gnueabi-gcc -Wp,-MD,/home/yarib/ZYBO_projects/Drivers/zybo/.zybo.mod.o.d  -nostdinc -isystem /opt/Xilinx/SDK/2015.4/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-linux-gnueabi/4.9.2/include -I./arch/arm/include -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -Os -Wno-maybe-uninitialized --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fomit-frame-pointer -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Werror=date-time -DCC_HAVE_ASM_GOTO  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(zybo.mod)"  -D"KBUILD_MODNAME=KBUILD_STR(zybo)" -DMODULE  -c -o /home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o /home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.c
 
-source_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := /home/yarib/ZYBO_projects/Drivers/adc/adc.c
+source_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o := /home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.c
 
-deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
-  include/linux/kernel.h \
-    $(wildcard include/config/lbdaf.h) \
-    $(wildcard include/config/preempt/voluntary.h) \
-    $(wildcard include/config/debug/atomic/sleep.h) \
-    $(wildcard include/config/mmu.h) \
-    $(wildcard include/config/prove/locking.h) \
-    $(wildcard include/config/panic/timeout.h) \
-    $(wildcard include/config/ring/buffer.h) \
+deps_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o := \
+    $(wildcard include/config/module/unload.h) \
+  include/linux/module.h \
+    $(wildcard include/config/sysfs.h) \
+    $(wildcard include/config/modules.h) \
+    $(wildcard include/config/unused/symbols.h) \
+    $(wildcard include/config/module/sig.h) \
+    $(wildcard include/config/generic/bug.h) \
+    $(wildcard include/config/kallsyms.h) \
+    $(wildcard include/config/smp.h) \
+    $(wildcard include/config/tracepoints.h) \
     $(wildcard include/config/tracing.h) \
+    $(wildcard include/config/event/tracing.h) \
     $(wildcard include/config/ftrace/mcount/record.h) \
-  /opt/Xilinx/SDK/2015.4/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.2/include/stdarg.h \
-  include/linux/linkage.h \
+    $(wildcard include/config/constructors.h) \
+    $(wildcard include/config/debug/set/module/ronx.h) \
+  include/linux/list.h \
+    $(wildcard include/config/debug/list.h) \
+  include/linux/types.h \
+    $(wildcard include/config/uid16.h) \
+    $(wildcard include/config/lbdaf.h) \
+    $(wildcard include/config/arch/dma/addr/t/64bit.h) \
+    $(wildcard include/config/phys/addr/t/64bit.h) \
+    $(wildcard include/config/64bit.h) \
+  include/uapi/linux/types.h \
+  arch/arm/include/asm/types.h \
+  include/asm-generic/int-ll64.h \
+  include/uapi/asm-generic/int-ll64.h \
+  arch/arm/include/generated/asm/bitsperlong.h \
+  include/asm-generic/bitsperlong.h \
+  include/uapi/asm-generic/bitsperlong.h \
+  include/uapi/linux/posix_types.h \
+  include/linux/stddef.h \
+  include/uapi/linux/stddef.h \
   include/linux/compiler.h \
     $(wildcard include/config/sparse/rcu/pointer.h) \
     $(wildcard include/config/trace/branch/profiling.h) \
@@ -27,33 +48,27 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
     $(wildcard include/config/optimize/inlining.h) \
   include/linux/compiler-gcc4.h \
     $(wildcard include/config/arch/use/builtin/bswap.h) \
+  arch/arm/include/uapi/asm/posix_types.h \
+  include/uapi/asm-generic/posix_types.h \
+  include/linux/poison.h \
+    $(wildcard include/config/illegal/pointer/value.h) \
+  include/uapi/linux/const.h \
+  include/linux/kernel.h \
+    $(wildcard include/config/preempt/voluntary.h) \
+    $(wildcard include/config/debug/atomic/sleep.h) \
+    $(wildcard include/config/mmu.h) \
+    $(wildcard include/config/prove/locking.h) \
+    $(wildcard include/config/panic/timeout.h) \
+    $(wildcard include/config/ring/buffer.h) \
+  /opt/Xilinx/SDK/2015.4/gnu/arm/lin/lib/gcc/arm-xilinx-linux-gnueabi/4.9.2/include/stdarg.h \
+  include/linux/linkage.h \
   include/linux/stringify.h \
   include/linux/export.h \
     $(wildcard include/config/have/underscore/symbol/prefix.h) \
-    $(wildcard include/config/modules.h) \
     $(wildcard include/config/modversions.h) \
-    $(wildcard include/config/unused/symbols.h) \
   arch/arm/include/asm/linkage.h \
-  include/linux/stddef.h \
-  include/uapi/linux/stddef.h \
-  include/linux/types.h \
-    $(wildcard include/config/uid16.h) \
-    $(wildcard include/config/arch/dma/addr/t/64bit.h) \
-    $(wildcard include/config/phys/addr/t/64bit.h) \
-    $(wildcard include/config/64bit.h) \
-  include/uapi/linux/types.h \
-  arch/arm/include/asm/types.h \
-  include/asm-generic/int-ll64.h \
-  include/uapi/asm-generic/int-ll64.h \
-  arch/arm/include/generated/asm/bitsperlong.h \
-  include/asm-generic/bitsperlong.h \
-  include/uapi/asm-generic/bitsperlong.h \
-  include/uapi/linux/posix_types.h \
-  arch/arm/include/uapi/asm/posix_types.h \
-  include/uapi/asm-generic/posix_types.h \
   include/linux/bitops.h \
   arch/arm/include/asm/bitops.h \
-    $(wildcard include/config/smp.h) \
   include/linux/irqflags.h \
     $(wildcard include/config/trace/irqflags.h) \
     $(wildcard include/config/irqsoff/tracer.h) \
@@ -133,11 +148,25 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
   arch/arm/include/asm/opcodes.h \
     $(wildcard include/config/cpu/endian/be32.h) \
   include/asm-generic/bug.h \
-    $(wildcard include/config/generic/bug.h) \
     $(wildcard include/config/generic/bug/relative/pointers.h) \
-  arch/arm/include/asm/uaccess.h \
-    $(wildcard include/config/have/efficient/unaligned/access.h) \
-    $(wildcard include/config/cpu/use/domains.h) \
+  include/linux/stat.h \
+  arch/arm/include/uapi/asm/stat.h \
+  include/uapi/linux/stat.h \
+  include/linux/time.h \
+    $(wildcard include/config/arch/uses/gettimeoffset.h) \
+  include/linux/seqlock.h \
+    $(wildcard include/config/debug/lock/alloc.h) \
+  include/linux/spinlock.h \
+    $(wildcard include/config/debug/spinlock.h) \
+    $(wildcard include/config/generic/lockbreak.h) \
+    $(wildcard include/config/preempt.h) \
+  include/linux/preempt.h \
+    $(wildcard include/config/debug/preempt.h) \
+    $(wildcard include/config/preempt/count.h) \
+    $(wildcard include/config/context/tracking.h) \
+    $(wildcard include/config/preempt/notifiers.h) \
+  arch/arm/include/generated/asm/preempt.h \
+  include/asm-generic/preempt.h \
   include/linux/thread_info.h \
     $(wildcard include/config/compat.h) \
     $(wildcard include/config/debug/stack/usage.h) \
@@ -170,7 +199,6 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
     $(wildcard include/config/arm/patch/phys/virt.h) \
     $(wildcard include/config/phys/offset.h) \
     $(wildcard include/config/virt/to/bus.h) \
-  include/uapi/linux/const.h \
   include/linux/sizes.h \
   include/asm-generic/memory_model.h \
     $(wildcard include/config/flatmem.h) \
@@ -180,39 +208,7 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
   include/asm-generic/getorder.h \
   arch/arm/include/asm/domain.h \
     $(wildcard include/config/io/36.h) \
-  arch/arm/include/asm/unified.h \
-    $(wildcard include/config/arm/asm/unified.h) \
-  include/linux/module.h \
-    $(wildcard include/config/sysfs.h) \
-    $(wildcard include/config/module/sig.h) \
-    $(wildcard include/config/kallsyms.h) \
-    $(wildcard include/config/tracepoints.h) \
-    $(wildcard include/config/event/tracing.h) \
-    $(wildcard include/config/module/unload.h) \
-    $(wildcard include/config/constructors.h) \
-    $(wildcard include/config/debug/set/module/ronx.h) \
-  include/linux/list.h \
-    $(wildcard include/config/debug/list.h) \
-  include/linux/poison.h \
-    $(wildcard include/config/illegal/pointer/value.h) \
-  include/linux/stat.h \
-  arch/arm/include/uapi/asm/stat.h \
-  include/uapi/linux/stat.h \
-  include/linux/time.h \
-    $(wildcard include/config/arch/uses/gettimeoffset.h) \
-  include/linux/seqlock.h \
-    $(wildcard include/config/debug/lock/alloc.h) \
-  include/linux/spinlock.h \
-    $(wildcard include/config/debug/spinlock.h) \
-    $(wildcard include/config/generic/lockbreak.h) \
-    $(wildcard include/config/preempt.h) \
-  include/linux/preempt.h \
-    $(wildcard include/config/debug/preempt.h) \
-    $(wildcard include/config/preempt/count.h) \
-    $(wildcard include/config/context/tracking.h) \
-    $(wildcard include/config/preempt/notifiers.h) \
-  arch/arm/include/generated/asm/preempt.h \
-  include/asm-generic/preempt.h \
+    $(wildcard include/config/cpu/use/domains.h) \
   include/linux/bottom_half.h \
   include/linux/preempt_mask.h \
   include/linux/spinlock_types.h \
@@ -228,6 +224,8 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
     $(wildcard include/config/have/hw/breakpoint.h) \
     $(wildcard include/config/arm/errata/754327.h) \
   arch/arm/include/asm/hw_breakpoint.h \
+  arch/arm/include/asm/unified.h \
+    $(wildcard include/config/arm/asm/unified.h) \
   include/linux/rwlock.h \
   include/linux/spinlock_api_smp.h \
     $(wildcard include/config/inline/spin/lock.h) \
@@ -427,121 +425,9 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
     $(wildcard include/config/have/mod/arch/specific.h) \
     $(wildcard include/config/modules/use/elf/rel.h) \
     $(wildcard include/config/modules/use/elf/rela.h) \
-  include/linux/slab.h \
-    $(wildcard include/config/slab/debug.h) \
-    $(wildcard include/config/kmemcheck.h) \
-    $(wildcard include/config/failslab.h) \
-    $(wildcard include/config/memcg/kmem.h) \
-    $(wildcard include/config/slab.h) \
-    $(wildcard include/config/slub.h) \
-    $(wildcard include/config/slob.h) \
-  include/linux/kmemleak.h \
-    $(wildcard include/config/debug/kmemleak.h) \
-  arch/arm/include/asm/io.h \
-    $(wildcard include/config/pci.h) \
-    $(wildcard include/config/need/mach/io/h.h) \
-    $(wildcard include/config/pcmcia/soc/common.h) \
-    $(wildcard include/config/isa.h) \
-    $(wildcard include/config/pccard.h) \
-  include/linux/blk_types.h \
-    $(wildcard include/config/block.h) \
-    $(wildcard include/config/blk/cgroup.h) \
-    $(wildcard include/config/blk/dev/integrity.h) \
-  include/asm-generic/pci_iomap.h \
-    $(wildcard include/config/no/generic/pci/ioport/map.h) \
-    $(wildcard include/config/generic/pci/iomap.h) \
-  include/xen/xen.h \
-    $(wildcard include/config/xen.h) \
-    $(wildcard include/config/xen/dom0.h) \
-    $(wildcard include/config/xen/pvh.h) \
-  include/linux/proc_fs.h \
-    $(wildcard include/config/proc/fs.h) \
-  include/linux/fs.h \
-    $(wildcard include/config/fs/posix/acl.h) \
-    $(wildcard include/config/security.h) \
-    $(wildcard include/config/ima.h) \
-    $(wildcard include/config/quota.h) \
-    $(wildcard include/config/fsnotify.h) \
-    $(wildcard include/config/epoll.h) \
-    $(wildcard include/config/file/locking.h) \
-    $(wildcard include/config/auditsyscall.h) \
-    $(wildcard include/config/fs/xip.h) \
-    $(wildcard include/config/migration.h) \
-  include/linux/kdev_t.h \
-  include/uapi/linux/kdev_t.h \
-  include/linux/dcache.h \
-  include/linux/rculist.h \
-  include/linux/rculist_bl.h \
-  include/linux/list_bl.h \
-  include/linux/bit_spinlock.h \
-  include/linux/lockref.h \
-    $(wildcard include/config/arch/use/cmpxchg/lockref.h) \
-  include/linux/path.h \
-  include/linux/list_lru.h \
-  include/linux/radix-tree.h \
-  include/linux/pid.h \
-  include/linux/capability.h \
-  include/uapi/linux/capability.h \
-  include/linux/semaphore.h \
-  include/uapi/linux/fiemap.h \
-  include/linux/shrinker.h \
-  include/linux/migrate_mode.h \
-  include/linux/percpu-rwsem.h \
-  include/uapi/linux/fs.h \
-  include/uapi/linux/limits.h \
-  include/uapi/linux/ioctl.h \
-  arch/arm/include/generated/asm/ioctl.h \
-  include/asm-generic/ioctl.h \
-  include/uapi/asm-generic/ioctl.h \
-  include/linux/quota.h \
-    $(wildcard include/config/quota/netlink/interface.h) \
-  include/linux/percpu_counter.h \
-  include/uapi/linux/dqblk_xfs.h \
-  include/linux/dqblk_v1.h \
-  include/linux/dqblk_v2.h \
-  include/linux/dqblk_qtree.h \
-  include/linux/projid.h \
-  include/uapi/linux/quota.h \
-  include/linux/nfs_fs_i.h \
-  include/linux/fcntl.h \
-  include/uapi/linux/fcntl.h \
-  arch/arm/include/uapi/asm/fcntl.h \
-  include/uapi/asm-generic/fcntl.h \
-  include/linux/seq_file.h \
-  include/linux/platform_device.h \
-    $(wildcard include/config/suspend.h) \
-    $(wildcard include/config/hibernate/callbacks.h) \
-  include/linux/device.h \
-    $(wildcard include/config/debug/devres.h) \
-    $(wildcard include/config/acpi.h) \
-    $(wildcard include/config/pinctrl.h) \
-    $(wildcard include/config/dma/cma.h) \
-    $(wildcard include/config/devtmpfs.h) \
-    $(wildcard include/config/sysfs/deprecated.h) \
-  include/linux/ioport.h \
-  include/linux/klist.h \
-  include/linux/pinctrl/devinfo.h \
-    $(wildcard include/config/pm.h) \
-  include/linux/pm.h \
-    $(wildcard include/config/vt/console/sleep.h) \
-    $(wildcard include/config/pm/runtime.h) \
-    $(wildcard include/config/pm/clk.h) \
-    $(wildcard include/config/pm/generic/domains.h) \
-  include/linux/ratelimit.h \
-  arch/arm/include/asm/device.h \
-    $(wildcard include/config/dmabounce.h) \
-    $(wildcard include/config/iommu/api.h) \
-    $(wildcard include/config/arm/dma/use/iommu.h) \
-    $(wildcard include/config/arch/omap.h) \
-  include/linux/pm_wakeup.h \
-  include/linux/mod_devicetable.h \
-  include/linux/uuid.h \
-  include/uapi/linux/uuid.h \
-  include/linux/ctype.h \
-  /home/yarib/ZYBO_projects/Drivers/adc/../../Hardware/ip_repo/ESPI_1.0/src/espi_hw.h \
-  /home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp \
-  /home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp \
+  include/linux/vermagic.h \
+  include/generated/utsrelease.h \
 
-/home/yarib/ZYBO_projects/Drivers/adc/adc.o: $(deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o)
+/home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o: $(deps_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o)
 
-$(deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o):
+$(deps_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.mod.o):

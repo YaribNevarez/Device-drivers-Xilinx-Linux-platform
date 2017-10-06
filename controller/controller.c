@@ -30,9 +30,9 @@
 #include <linux/types.h>
 #include <linux/fcntl.h>
 
-
-#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/iodef.hpp"
-#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/deviceid.hpp"
+#define KERNEL_MODULE
+#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp"
+#include "/home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp"
 
 /* Define Driver Name */
 #define DRIVER_NAME "controller"
@@ -351,7 +351,7 @@ static int driver_probe(struct platform_device *pdev)
 
     if (rc == SUCCESS)
     {
-        driver_proc_entry = proc_create(DRIVER_NAME, 666, NULL, &proc_driver_operations);
+        driver_proc_entry = proc_create(DRIVER_NAME, 0, NULL, &proc_driver_operations);
         if (driver_proc_entry == NULL)
         {
             dev_err(&pdev->dev, "Couldn't create proc entry\n");

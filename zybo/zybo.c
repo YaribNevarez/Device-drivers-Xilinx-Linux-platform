@@ -1,5 +1,5 @@
 /*
- * AXI Timer v2.0 - PWM Linux driver
+ * AXI GPIO v2.0 - Linux driver
  *
  * Yarib Nevárez <yarib_007@hotmail.com>
  *
@@ -35,111 +35,51 @@
 #include "/home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp"
 
 /* Define Driver Name */
-#define DRIVER_NAME     "pwm_0"
+#define DRIVER_NAME "zybo"
 
-static unsigned long   * base_addr  = NULL;
-static struct resource * res        = NULL;
-static unsigned long     remap_size = 0;
-static int               major;     // major number we get from the kernel
-static DeviceID          device_ID = 0;
+#define SUCCESS     0
 
-#define SUCCESS 0
 
-static void outport(u8 offset, u32 data)
+static unsigned long * base_addr = NULL;
+static struct resource * res = NULL;
+static unsigned long remap_size = 0;
+static DeviceID    device_ID = 0;
+static u32  output_data = 0;
+
+static int major;       /* major number we get from the kernel */
+
+// static void configport(u32 data, u32 offset)
+// {
+//     static u32 current_data = 0;
+
+//     if (current_data != data)
+//     {
+//         wmb();
+//         iowrite32(data, base_addr + offset);
+//         current_data = data;
+//     }
+// }
+
+static void outport(u32 data, u32 offset)
 {
-    wmb();
-    iowrite32(data, base_addr + offset);
+    static u32 current_data = 0;
+
+    if (current_data != data)
+    {
+        wmb();
+        iowrite32(data, base_addr + offset);
+        current_data = data;
+    }
 }
 
-static u32 inport(u8 offset)
+static u32 inport(u32 offset)
 {
     wmb();
     return ioread32(base_addr + offset);
 }
 
-// *** Register index
-typedef enum
-{
-    TCSR0 = 0x0,    // Timer 0 Control and Status Register
-    TLR0,           // Timer 0 Load Register
-    TCR0,           // Timer 0 Counter Register
-    RSVD0,          // Reserved
-    TCSR1,          // Timer 1 Control and Status Register
-    TLR1,           // Timer 1 Load Register
-    TCR1,           // Timer 1 Counter Register
-    RSVD1           // Reserved
-} AXI_Timer_Register_Index;
-
-// *** Control/Status Register 0 flags (TCSR0)
-typedef enum
-{
-    MDT0   = 0x001, // Timer 0 Mode (generate/capture)
-    UDT0   = 0x002, // Up/Down Count Timer 0
-    GENT0  = 0x004, // Enable External Generate Signal Timer 0
-    CAPT0  = 0x008, // Enable External Capture Trigger Timer 0
-    ARHT0  = 0x010, // Auto Reload/Hold Timer 0
-    LOAD0  = 0x020, // Load Timer 0
-    ENIT0  = 0x040, // Enable Interrupt for Timer 0
-    ENT0   = 0x080, // Enable Timer 0
-    T0INT  = 0x100, // Timer 0 Interrupt
-    PWMA0  = 0x200, // Enable Pulse Width Modulation for Timer 0
-    ENALL0 = 0x400, // Enable All Timers
-    CASC   = 0x800  // Enable cascade mode of timers
-} TCR0_Flags;
-
-// *** Control/Status Register 1 flags (TCSR1)
-typedef enum
-{
-    MDT1   = 0x001, // Timer 1 Mode (generate/capture)
-    UDT1   = 0x002, // Up/Down Count Timer1
-    GENT1  = 0x004, // Enable External Generate Signal Timer1
-    CAPT1  = 0x008, // Enable External Capture Trigger Timer1
-    ARHT1  = 0x010, // Auto Reload/Hold Timer1
-    LOAD1  = 0x020, // Load Timer1
-    ENIT1  = 0x040, // Enable Interrupt for Timer1
-    ENT1   = 0x080, // Enable Timer1
-    T1INT  = 0x100, // Timer1 Interrupt
-    PWMB0  = 0x200, // Enable Pulse Width Modulation for Timer1
-    ENALL1 = 0x400  // Enable All Timers
-} TCR1_Flags;
-
-static void pwm_set_period(u32 period)
-{
-    outport(TLR0, period);
-}
-
-static u32  pwm_get_period(void)
-{
-    return inport(TLR0);
-}
-
-static void pwm_set_high_time(u32 high_time)
-{
-    outport(TLR1, high_time);
-}
-
-static u32  pwm_get_high_time(void)
-{
-    return inport(TLR1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-#define AXI_CLK_FRECUENCY_HZ  50000000 // <--- Define AXI clk frecuency !
-#define PWM_FRECUENCY         1000     // <--- Define desired PWM frecuency !
-///////////////////////////////////////////////////////////////////////////////
-
-#define CALCULATE_PERIOD_REGISTER(AXI_FREC, PWM_FREC)   (((AXI_FREC) / (PWM_FREC)) - 2)
-#define AXI_PERIOD_REGISTER                             CALCULATE_PERIOD_REGISTER(AXI_CLK_FRECUENCY_HZ, PWM_FRECUENCY)
-
-static void pwm_initialize(void)
-{
-    outport(TCSR0, ENALL0 | PWMA0 | GENT0 | UDT0);
-    outport(TCSR1, ENALL1 | PWMB0 | GENT1 | UDT1);
-
-    pwm_set_period(AXI_PERIOD_REGISTER);
-    pwm_set_high_time(0);
-}
-
+#define SET_SLICE_32(register, value, offset, mask) (register) = (((register) & ~((mask) << (offset))) | (((value) & (mask)) << (offset)))
+#define GET_SLICE_32(register, offset, mask) (((register) & ((mask) << (offset))) >> (offset))
 
 /* Write operation for /proc/driver
 * -----------------------------------
@@ -167,11 +107,16 @@ static ssize_t proc_driver_write(struct file *file,
                 device_ID = packet.device_ID;
                 switch (packet.device_ID)
                 {
-                    case PWM_0:
-                        pwm_set_high_time(packet.data);
+                    case ZYBO_BUTTONS:
+                        break;
+                    case ZYBO_SWITCHES:
+                        break;
+                    case ZYBO_LEDS:
+                        SET_SLICE_32(output_data, packet.data, 0, 0xF);
                         break;
                     default:;
                 }
+                outport(output_data, 2);
                 * position += written_size;
             }
         }
@@ -192,8 +137,22 @@ static ssize_t proc_driver_read(struct file *file,
     if ((buffer != NULL) && (sizeof(IOPacket) <= buffer_size))
     {
         IOPacket packet;
+        u32 input_data = inport(0);
         packet.device_ID = device_ID;
-        packet.data = pwm_get_high_time();
+
+        switch (device_ID)
+        {
+            case ZYBO_BUTTONS:
+                packet.data = GET_SLICE_32(input_data, 0, 0xF);
+                break;
+            case ZYBO_SWITCHES:
+                packet.data = GET_SLICE_32(input_data, 4, 0xF);
+                break;
+            case ZYBO_LEDS:
+                packet.data = GET_SLICE_32(output_data, 0, 0xF);
+                break;
+            default:;
+        }
         read_size = buffer_size - copy_to_user(buffer, (void *) &packet, sizeof(IOPacket));
     }
     return read_size;
@@ -209,7 +168,7 @@ static ssize_t proc_driver_read(struct file *file,
 */
 static int proc_driver_show(struct seq_file *p, void *v)
 {
-    seq_printf(p, " PWM_0, Period = 0x%08X, High time = 0x%08X\n", pwm_get_period(), pwm_get_high_time());
+    seq_printf(p, "\nzybo kernel module\n");
     return SUCCESS;
 }
 
@@ -221,7 +180,7 @@ static int proc_driver_show(struct seq_file *p, void *v)
 */
 static int driver_open(struct inode *inode, struct file *file)
 {
-    unsigned int size = 64;
+    unsigned int size = 16;
     char * buf;
     struct seq_file * m;
     int rc = SUCCESS;
@@ -231,7 +190,7 @@ static int driver_open(struct inode *inode, struct file *file)
     {
         rc = single_open(file, proc_driver_show, NULL);
 
-        if (!rc)
+        if (rc == SUCCESS)
         {
             m = file->private_data;
             m->buf = buf;
@@ -267,7 +226,7 @@ static const struct file_operations proc_driver_operations =
 */
 static void driver_shutdown(struct platform_device *pdev)
 {
-    pwm_set_high_time(0x00000000);
+    iowrite32(0, base_addr);
 }
 
 /* Remove function for driver
@@ -335,7 +294,7 @@ static int driver_probe(struct platform_device *pdev)
 
     if (rc == SUCCESS)
     {
-        driver_proc_entry = proc_create(DRIVER_NAME, 666, NULL, &proc_driver_operations);
+        driver_proc_entry = proc_create(DRIVER_NAME, 0, NULL, &proc_driver_operations);
         if (driver_proc_entry == NULL)
         {
             dev_err(&pdev->dev, "Couldn't create proc entry\n");
@@ -351,29 +310,30 @@ static int driver_probe(struct platform_device *pdev)
 
         major = register_chrdev(0, DRIVER_NAME, &proc_driver_operations);
 
-        pwm_initialize();
+        output_data = 0;
+        outport(output_data, 2);
     }
 
     return rc;
 }
 
 /* device match table to match with device node in device tree */
-static const struct of_device_id zynq_pwm_0_match[] =
+static const struct of_device_id zynq_pmod_match[] =
 {
-    {.compatible = "yarib-pwm_0-1.00.a"},
+    {.compatible = "yarib-zybo-1.00.a"},
     { },
 };
 
-MODULE_DEVICE_TABLE(of, zynq_pwm_0_match);
+MODULE_DEVICE_TABLE(of, zynq_pmod_match);
 
 /* platform driver structure for device driver */
-static struct platform_driver zynq_pwm_0_driver =
+static struct platform_driver zynq_pmod_driver =
 {
     .driver =
     {
         .name = DRIVER_NAME,
         .owner = THIS_MODULE,
-        .of_match_table = zynq_pwm_0_match
+        .of_match_table = zynq_pmod_match
     },
     .probe = driver_probe,
     .remove = driver_remove,
@@ -381,10 +341,10 @@ static struct platform_driver zynq_pwm_0_driver =
 };
 
 /* Register device platform driver */
-module_platform_driver(zynq_pwm_0_driver);
+module_platform_driver(zynq_pmod_driver);
 
 /* Module Informations */
 MODULE_AUTHOR("Yarib, Inc.");
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION(DRIVER_NAME ": PWM module");
+MODULE_DESCRIPTION(DRIVER_NAME ": zybo module");
 MODULE_ALIAS(DRIVER_NAME);
