@@ -3,7 +3,7 @@
 
 if [ "$1" != "" ]; then
     echo "Transfering kernel module to ZYNQ device @ $1 ... "
-    echo " ___ CONTROLLER ___ "
+    echo " ___ ZYBO ___ "
     echo "/etc/controller-manager/controller"
     scp zybo.ko root@$1:/etc/controller-manager/zybo
 else

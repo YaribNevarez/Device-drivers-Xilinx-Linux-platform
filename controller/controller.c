@@ -40,11 +40,11 @@
 #define SUCCESS     0
 
 
-static unsigned long * base_addr = NULL;
-static struct resource * res = NULL;
-static unsigned long remap_size = 0;
-static DeviceID    device_ID = 0;
-static u32  output_data = 0;
+static unsigned long *   base_addr   = NULL;
+static struct resource * res         = NULL;
+static unsigned long     remap_size  = 0;
+static DeviceID          device_ID   = 0;
+static u32               output_data = 0;
 
 static int major;       /* major number we get from the kernel */
 

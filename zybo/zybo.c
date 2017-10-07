@@ -40,11 +40,11 @@
 #define SUCCESS     0
 
 
-static unsigned long * base_addr = NULL;
-static struct resource * res = NULL;
-static unsigned long remap_size = 0;
-static DeviceID    device_ID = 0;
-static u32  output_data = 0;
+static unsigned long *   base_addr   = NULL;
+static struct resource * res         = NULL;
+static unsigned long     remap_size  = 0;
+static DeviceID          device_ID   = 0;
+static u32               output_data = 0;
 
 static int major;       /* major number we get from the kernel */
 
@@ -226,7 +226,8 @@ static const struct file_operations proc_driver_operations =
 */
 static void driver_shutdown(struct platform_device *pdev)
 {
-    iowrite32(0, base_addr);
+    output_data = 0;
+    outport(output_data, 2);
 }
 
 /* Remove function for driver

@@ -81,12 +81,12 @@ typedef enum
 } MAX116XX_Reference;
 
 
-static unsigned long * base_addr = NULL;
-static struct resource * res = NULL;
-static unsigned long remap_size = 0;
-static int major;       /* major number we get from the kernel */
-static u8 ADC_chanel = 0;
-static DeviceID device_ID = 0;
+static unsigned long *   base_addr  = NULL;
+static struct resource * res        = NULL;
+static unsigned long     remap_size = 0;
+static int               major;       /* major number we get from the kernel */
+static u8                ADC_chanel = 0;
+static DeviceID          device_ID  = 0;
 
 static void outport(u8 offset, u32 data)
 {
