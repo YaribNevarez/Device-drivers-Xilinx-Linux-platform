@@ -126,7 +126,7 @@ static ssize_t proc_driver_write(struct file *file,
                         break;
                     case DRAINDELAY:
                         break;
-                    case VACUMGEN:
+                    case VACUUMGEN:
                         SET_SLICE_32(output_data, packet.data, 19, 0x1);
                         break;
                     case DRAININDICATOR:
@@ -178,7 +178,7 @@ static ssize_t proc_driver_read(struct file *file,
             case SHUTOFFVALVE:
                 packet.data = GET_SLICE_32(input_data, 2, 1);
                 break;
-            case VACUMGEN:
+            case VACUUMGEN:
                 packet.data = GET_SLICE_32(input_data, 3, 1);
                 break;
             case IRSENSOR:

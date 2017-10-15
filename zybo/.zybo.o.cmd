@@ -538,8 +538,8 @@ deps_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.o := \
   include/linux/uuid.h \
   include/uapi/linux/uuid.h \
   include/linux/ctype.h \
-  /home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp \
-  /home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp \
+  /home/yarib/ZYBO_projects/Drivers/zybo/../../app-workspace/base_framework/device/iodef.hpp \
+  /home/yarib/ZYBO_projects/Drivers/zybo/../../app-workspace/extension_framework/deviceid.hpp \
 
 /home/yarib/ZYBO_projects/Drivers/zybo/zybo.o: $(deps_/home/yarib/ZYBO_projects/Drivers/zybo/zybo.o)
 
