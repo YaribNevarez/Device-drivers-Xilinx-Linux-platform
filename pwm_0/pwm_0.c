@@ -31,8 +31,8 @@
 #include <linux/fcntl.h>
 
 #define KERNEL_MODULE
-#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp"
-#include "/home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp"
+#include "../../app-workspace/base_framework/device/iodef.hpp"
+#include "../../app-workspace/extension_framework/deviceid.hpp"
 
 /* Define Driver Name */
 #define DRIVER_NAME     "pwm_0"

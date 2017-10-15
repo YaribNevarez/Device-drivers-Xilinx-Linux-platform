@@ -32,8 +32,8 @@
 
 #include "../../Hardware/ip_repo/ESPI_1.0/src/espi_hw.h"
 #define KERNEL_MODULE
-#include "/home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp"
-#include "/home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp"
+#include "../../app-workspace/base_framework/device/iodef.hpp"
+#include "../../app-workspace/extension_framework/deviceid.hpp"
 
 /* Define Driver Name */
 #define DRIVER_NAME "adc"
@@ -305,6 +305,10 @@ static ssize_t proc_driver_write(struct file *file,
             default:;
         }
     }
+    else
+    {   // Not handled, allow flushing
+        written_size = buffer_size;
+    }
     return written_size;
 }
 
@@ -324,6 +328,10 @@ static ssize_t proc_driver_read(struct file *file,
         packet.device_ID = device_ID;
         packet.data = adc_read(ADC_chanel);
         read_size = buffer_size - copy_to_user(buffer, (void *) &packet, sizeof(IOPacket));
+    }
+    else
+    {   // Not handled, allow flushing
+        read_size = buffer_size;
     }
     return read_size;
 }

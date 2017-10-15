@@ -539,8 +539,8 @@ deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o := \
   include/uapi/linux/uuid.h \
   include/linux/ctype.h \
   /home/yarib/ZYBO_projects/Drivers/adc/../../Hardware/ip_repo/ESPI_1.0/src/espi_hw.h \
-  /home/yarib/ZYBO_projects/app-workspace/framework/framework/device/iodef.hpp \
-  /home/yarib/ZYBO_projects/app-workspace/platform/platform/deviceid.hpp \
+  /home/yarib/ZYBO_projects/Drivers/adc/../../app-workspace/base_framework/device/iodef.hpp \
+  /home/yarib/ZYBO_projects/Drivers/adc/../../app-workspace/extension_framework/deviceid.hpp \
 
 /home/yarib/ZYBO_projects/Drivers/adc/adc.o: $(deps_/home/yarib/ZYBO_projects/Drivers/adc/adc.o)
 
