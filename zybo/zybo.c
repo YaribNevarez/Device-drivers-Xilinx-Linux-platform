@@ -307,7 +307,7 @@ static int driver_probe(struct platform_device *pdev)
 
     if (rc == SUCCESS)
     {
-        printk(KERN_INFO DRIVER_NAME " Maped at virtual address 0x%08lx\n", (unsigned long) base_addr);
+        printk(KERN_INFO DRIVER_NAME " Mapped at virtual address 0x%08lx\n", (unsigned long) base_addr);
 
         major = register_chrdev(0, DRIVER_NAME, &proc_driver_operations);
 

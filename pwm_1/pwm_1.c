@@ -124,12 +124,12 @@ static u32  pwm_get_high_time(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-#define AXI_CLK_FRECUENCY_HZ  50000000 // <--- Define AXI clk frecuency !
-#define PWM_FRECUENCY         1000     // <--- Define desired PWM frecuency !
+#define AXI_CLK_FREQUENCY_HZ  50000000 // <--- Define AXI clk frecuency !
+#define PWM_FREQUENCY         1000     // <--- Define desired PWM frecuency !
 ///////////////////////////////////////////////////////////////////////////////
 
-#define CALCULATE_PERIOD_REGISTER(AXI_FREC, PWM_FREC)   (((AXI_FREC) / (PWM_FREC)) - 2)
-#define AXI_PERIOD_REGISTER                             CALCULATE_PERIOD_REGISTER(AXI_CLK_FRECUENCY_HZ, PWM_FRECUENCY)
+#define CALCULATE_PERIOD_REGISTER(AXI_FREQ, PWM_FREQ)   (((AXI_FREQ) / (PWM_FREQ)) - 2)
+#define AXI_PERIOD_REGISTER                             CALCULATE_PERIOD_REGISTER(AXI_CLK_FREQUENCY_HZ, PWM_FREQUENCY)
 
 static void pwm_initialize(void)
 {
